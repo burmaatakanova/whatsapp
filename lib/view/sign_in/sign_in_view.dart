@@ -1,10 +1,11 @@
 import 'dart:developer';
-import 'dart:js';
+
 
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp/models/user_models.dart';
 import 'package:whatsapp/view/chats/chats_view.dart';
 import 'package:whatsapp/view/sign_up/sign_up_view.dart';
 
@@ -19,8 +20,9 @@ class SignINView extends StatelessWidget {
         email: emailConroller.text,
         password: passwordConroller.text,
       );
-      Navigator.push(context as BuildContext,
-          MaterialPageRoute(builder: (context) => ChatsView(data: data)));
+    final userModel  =UserModel(userName: "", id: credential.user!.uid, email: emailConroller.text, parol: passwordConroller.text, timestamp: Timestamp.now());
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ChatsView(data: userModel)));
       log("login credential-->$credential");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -41,7 +43,7 @@ class SignINView extends StatelessWidget {
           "Sign In",
           style: TextStyle(fontSize: 25),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Center(
@@ -76,7 +78,7 @@ class SignINView extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Padding(
@@ -118,7 +120,7 @@ class SignINView extends StatelessWidget {
             onPressed: () {
               login(context);
             },
-            child: Text(
+            child: const Text(
               "Sign up",
               style: TextStyle(fontSize: 20),
             ))

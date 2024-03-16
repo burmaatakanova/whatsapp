@@ -46,13 +46,13 @@ class _SignUpViewState extends State<SignUpView> {
         userName: userNameConroller.text,
         email: userNameConroller.text,
         timestamp: Timestamp.now());
-    users.doc(userCredential.user!.uid).set(userModel.).then((value) {
+    users.doc(userCredential.user!.uid).set(userModel.toMap()).then((value) {
       log("User added");
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ChatsView(
-                    data: data,
+                    data: userModel,
                   )));
     }).catchError((onError) => print("Failed to add"));
   }
@@ -72,7 +72,6 @@ class _SignUpViewState extends State<SignUpView> {
           child: Center(
             child: TextFormField(
               controller: userNameConroller,
-             
               style: const TextStyle(
                   fontSize: 20,
                   fontStyle: FontStyle.italic,
@@ -96,7 +95,7 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Center(
@@ -131,7 +130,7 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Padding(
@@ -173,7 +172,7 @@ class _SignUpViewState extends State<SignUpView> {
             onPressed: () {
               signUp(context);
             },
-            child: Text(
+            child: const Text(
               "Sign up",
               style: TextStyle(fontSize: 20),
             ))

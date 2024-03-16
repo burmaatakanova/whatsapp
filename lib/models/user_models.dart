@@ -33,7 +33,7 @@ class UserModel {
       id: map['id'] as String,
       email: map['email'] as String,
       parol: map['parol'] as String,
-      timestamp: Timestamp.fromMap(map['timestamp'] as Map<String, dynamic>),
+      timestamp: map['timestamp'] as Timestamp,
     );
   }
 
